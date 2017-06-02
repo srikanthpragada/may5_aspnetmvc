@@ -1,0 +1,26 @@
+﻿@model mvcdemo.Models.Course
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/CommonLayout.cshtml";
+}
+
+<h2>Add Course</h2>
+
+@using (Html.BeginForm()) 
+{
+    <div>Course Title</div>
+    @Html.EditorFor(model => model.Title)
+    <p></p>
+    <div>Course Duration</div>
+    @Html.EditorFor(model => model.Duration)
+    <div>Course Price</div>
+    <p></p>
+    @Html.EditorFor(model => model.Price)
+    <p></p>
+    <input type="submit" value="Add Course" />
+}
+<p></p>
+<div>
+    @Html.ActionLink("Couses List", "Index")
+</div>

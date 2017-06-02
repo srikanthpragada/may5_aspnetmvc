@@ -1,0 +1,41 @@
+﻿@model IEnumerable<mvcdemo.Models.Course>
+
+@{
+    ViewBag.Title = "List Of Courses";
+    Layout = "~/Views/Shared/CommonLayout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Add Course", "Add")
+</p>
+<table border="1">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Duration
+        </th>
+        <th>
+            Price
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+             @item.Title  
+        </td>
+        <td>
+            @item.Duration
+            
+        </td>
+        <td>
+            @item.Price
+            
+        </td>
+    </tr>
+}
+
+</table>
