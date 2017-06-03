@@ -12,13 +12,7 @@ namespace mvcdemo.Controllers
         // Display all courses 
         public ActionResult Index()
         {
-            List<Course> courses = new List<Course> {
-                 new Course { Title ="ASP.NET MVC", Duration = 20, Price = 2000 },
-                 new Course { Title ="Angular", Duration = 10, Price = 1500 },
-                 new Course { Title ="Spring", Duration = 20, Price = 3000 }
-            };
-
-            return View(courses);
+            return View(CoursesDatabase.Courses);
         }
 
         [HttpGet]
@@ -31,8 +25,35 @@ namespace mvcdemo.Controllers
         [HttpPost]
         public ActionResult Add(Course course)
         {
+            // process it 
+            CoursesDatabase.Courses.Add(course);
+            ViewBag.Message = "Course has been added!";
             return View(course);
         }
+
+        [HttpGet]
+        public ActionResult FeeFinder()
+        {
+            CourseFeeViewModel model = new CourseFeeViewModel();
+            model.Timings = "e"; // default is evening 
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public ActionResult FeeFinder(CourseFeeViewModel model)
+        {
+            model.CourseFee = model.BaseFee;
+
+            if (model.Timings == "m")
+                model.CourseFee = model.CourseFee - model.CourseFee * 10 / 100;
+
+            if (model.OldStudent)
+                model.CourseFee = model.CourseFee - model.CourseFee * 10 / 100;
+
+            return View(model);
+        }
+
 
 
     }

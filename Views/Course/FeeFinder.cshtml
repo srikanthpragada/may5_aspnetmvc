@@ -1,0 +1,32 @@
+﻿@model mvcdemo.Models.CourseFeeViewModel
+
+@{
+    ViewBag.Title = "FeeFinder";
+    Layout = "~/Views/Shared/CommonLayout.cshtml";
+}
+
+<h2>Course Fee Finder</h2>
+
+@using (Html.BeginForm())
+{
+    <span>Select Course</span>
+    @Html.DropDownListFor(model => model.BaseFee,
+                              mvcdemo.Models.CoursesDatabase.AvailableCourses)
+    <p />
+    <span>Timings</span>
+    @Html.RadioButtonFor(model => model.Timings, "m")<span>Morning</span>
+    @Html.RadioButtonFor(model => model.Timings, "e")<span>Evening</span>
+
+    <p />
+    <span>Are you an old student? </span>
+    @Html.CheckBoxFor(model => model.OldStudent)
+    <p />
+    <input type="submit" value="Calculate" />
+    <p />
+
+    if(Model.CourseFee > 0)
+    {
+        <h2>Course Fee : @Model.CourseFee</h2>
+
+    }
+}
