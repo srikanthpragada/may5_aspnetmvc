@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/CommonLayout.cshtml";
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+<h2>Ajax Demo</h2>
+
+@Ajax.ActionLink("Show Date and Time","Now", new AjaxOptions {  UpdateTargetId="result"})
+
+<h2 id="result"></h2>
+

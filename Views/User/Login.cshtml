@@ -1,0 +1,25 @@
+﻿@model mvcdemo.Models.User
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/CommonLayout.cshtml";
+}
+
+
+<h2>Login</h2>
+
+@using (Html.BeginForm()) 
+{
+    <span>Username : </span>
+    @Html.EditorFor(model => model.UserName)
+    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+    <p></p>
+    <span>Password : </span>
+    @Html.PasswordFor(model => model.Password)
+    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+    <p></p>
+    <input type="submit" value="Login" />
+    <p></p>
+    @ViewBag.Message 
+            
+}
