@@ -7,7 +7,20 @@
 
 <h2>Ajax Demo</h2>
 
-@Ajax.ActionLink("Show Date and Time","Now", new AjaxOptions {  UpdateTargetId="result"})
+@Ajax.ActionLink("Show Date and Time", "Now", new AjaxOptions { UpdateTargetId = "result" })
 
 <h2 id="result"></h2>
+
+<hr/>
+
+<h2>Search Courses</h2>
+@using (Ajax.BeginForm("Search", 
+              new AjaxOptions { UpdateTargetId = "searchResults" }))
+{
+    <input type="text" placeholder="Course Name" name="coursename" />
+    <input type="Submit" value="Search" />
+    <p></p>
+    <div id="searchResults"></div>
+
+}
 

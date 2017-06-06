@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace mvcdemo.Controllers
 {
     public class UserController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             return View();
@@ -27,7 +29,10 @@ namespace mvcdemo.Controllers
             if (ModelState.IsValid)
             {
                 if (user.UserName == "admin" && user.Password == "admin")
-                   return RedirectToAction("Index");
+                {
+                    FormsAuthentication.SetAuthCookie(user.UserName, false);
+                    return RedirectToAction("Index");
+                }
                 else
                 {
                     ViewBag.Message = "Invalid Login!";

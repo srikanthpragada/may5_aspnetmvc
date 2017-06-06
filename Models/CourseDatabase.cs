@@ -11,7 +11,9 @@ namespace mvcdemo.Models
         static private List<Course> courses = new List<Course> {
                  new Course { Title ="ASP.NET MVC", Duration = 20, Price = 2000 },
                  new Course { Title ="Angular", Duration = 10, Price = 1500 },
-                 new Course { Title ="Spring", Duration = 20, Price = 3000 }
+                 new Course { Title ="Spring", Duration = 20, Price = 3000 },
+                 new Course { Title ="Java EE", Duration = 40, Price = 4000 },
+                 new Course { Title ="Java SE", Duration = 40, Price = 3500 }
         };
 
         public static List<Course> Courses

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mvcdemo.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,5 +19,20 @@ namespace mvcdemo.Controllers
         {
             return DateTime.Now.ToString();
         }
+
+        public ActionResult Search(String coursename)
+        {
+            List<Course> courses = new List<Course>();
+
+            foreach(Course c in CoursesDatabase.Courses)
+            {
+                if (c.Title.Contains(coursename))
+                    courses.Add(c);
+            }
+
+            return PartialView("Search", courses);
+        }
+
+
     }
 }
