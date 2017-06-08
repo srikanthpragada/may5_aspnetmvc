@@ -1,0 +1,34 @@
+﻿@model mvcdemo.Models.Category
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add Caterory</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+
+        <h2>Add Category</h2>
+            <span>Category Code</span> <br/>
+            @Html.EditorFor(model => model.Code)
+            <p></p>
+            <span>Category Description</span> <br/>
+            @Html.EditorFor(model => model.Description)
+            <p></p>
+            <input type="submit" value="Add" />
+    }
+    <p></p>
+    <h3>@ViewBag.Message</h3>
+    <p></p>
+    <div>
+        @Html.ActionLink("List Categories", "Index")
+    </div>
+</body>
+</html>

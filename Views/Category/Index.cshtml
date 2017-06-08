@@ -1,0 +1,53 @@
+﻿@model IEnumerable<mvcdemo.Models.Category>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List Categories</title>
+    <style>
+        .table { width:100%; }
+    </style>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Add New Category", "Add")
+    </p>
+    <table class="table" border="1" cellpadding="5px" >
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Code }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Code },
+                         new { onclick = "return confirm('Do you really want to delete category?')" })
+            </td>
+        </tr>
+    }
+    
+    </table>
+
+    <p></p>
+    <h3>@TempData["Message"]</h3>
+</body>
+</html>
