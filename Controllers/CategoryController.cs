@@ -51,5 +51,47 @@ namespace mvcdemo.Controllers
             TempData["Message"] = "Deleted Category Successfully!";
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public ActionResult Edit(String id)
+        {
+            InventoryDataContext ctx = new InventoryDataContext();
+            var cat = (from c in ctx.Categories
+                       where c.Code == id
+                       select c).SingleOrDefault();
+
+            if (cat == null)
+            {
+                TempData["Message"] = "Sorry! Could not delete category with id : " + id;
+                return RedirectToAction("Index");
+            }
+
+            return View(cat);
+            
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Category newCat)
+        {
+            InventoryDataContext ctx = new InventoryDataContext();
+            var cat = (from c in ctx.Categories
+                       where c.Code == newCat.Code
+                       select c).SingleOrDefault();
+
+            if (cat == null)
+            {
+                TempData["Message"] = "Sorry! Could not find category with id : " + cat.Code;
+            }
+            else
+            {
+
+                cat.Description = newCat.Description;
+                ctx.SubmitChanges();
+                TempData["Message"] = "Successfully Updated Category : " + cat.Code;
+            }
+
+            return RedirectToAction("Index");
+
+        }
     }
 }

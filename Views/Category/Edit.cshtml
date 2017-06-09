@@ -1,0 +1,30 @@
+﻿@model mvcdemo.Models.Category
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit Category</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+            <h2>Edit Category</h2>
+            @Html.HiddenFor(model => model.Code)
+            <span>Description </span> 
+            @Html.EditorFor(model => model.Description)
+            <p></p>
+            <input type="submit" value="Update" />
+
+    }
+    <p></p>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>

@@ -23,5 +23,14 @@ namespace mvcdemo.Models
             }
 
         }
+
+        public Table<Product> Products
+        {
+            get
+            {
+                return GetTable<Product>();
+            }
+
+        }
     }
 }
