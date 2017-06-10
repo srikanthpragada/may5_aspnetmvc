@@ -32,5 +32,14 @@ namespace mvcdemo.Models
             }
 
         }
+
+        public Table<Sale> Sales
+        {
+            get
+            {
+                return GetTable<Sale>();
+            }
+
+        }
     }
 }
