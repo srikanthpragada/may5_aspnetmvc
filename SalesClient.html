@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script>
+        function getSales() {
+            $("#squares").css("visibility", "visible");
+            $.getJSON("api/Sales", {}, showSales ); // URL , parameters, callbackmethod 
+        }
+
+        function showSales(sales) {
+            $("#salesTable").html("");
+            $.each(sales,
+                function (idx, sale) {
+                    $("#salesTable").append("<tr><td>" + sale.Invno
+                        + "</td><td>" + sale.Product
+                        + "</td><td>" + sale.Amount + "</td><td>" + sale.Qty + "</td></tr>");
+                }
+            );
+
+            $("#squares").css("visibility", "hidden");
+            $("#output").css("visibility", "visible");
+        }
+
+        function getSaleDetails() {
+            $.getJSON("api/Sales/" + $("#invno").val(), {}, showSaleDetails); // URL , parameters, callbackmethod 
+        }
+
+        function showSaleDetails(sale) {
+            alert(sale);
+            $("#product").val(sale.Product);
+            $("#qty").val(sale.Qty);
+            $("#amount").val(sale.Amount);
+        }
+
+        function deleteSale() {
+            $.ajax(
+                {
+                    url: "api/Sales/" + $("#invno").val(),
+                    method: "DELETE",  // Delete request 
+                    success: function () { alert("Sale was deleted successfully!") },
+                    error: function () { alert("Sorry! Sale was not deleted!") },
+                }
+            );
+        }
+    </script>
+</head>
+<body>
+    <button onclick="getSales()">Get Sales</button>
+    <img id="squares" src="squares.gif"  style="visibility:hidden" />
+    <p></p>
+    <table border="1" id="output"  style="visibility:hidden" >
+        <thead>
+            <tr style="background-color:red;color:white;font-weight :bold">
+              <th>Invno</th><th>Product</th><th>Amount</th><th>Qty</th></tr>
+        </thead>
+        <tbody id="salesTable"></tbody>
+    </table>
+    <p></p>
+    <input type="text" placeholder="Invoice No" id="invno"/>
+    <button onclick="getSaleDetails()">Get Details</button>
+    <p></p>
+    Product Id <br/>
+    <input type="text" id="product"/>
+    <p></p>
+    Quantity <br />
+    <input type="text" id="qty" />
+    <p></p>
+    Amount <br />
+    <input type="text" id="amount" />
+    <p></p>
+    <button onclick="deleteSale()">Delete</button>
+
+</body>
+</html>
