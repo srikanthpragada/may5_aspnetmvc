@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render("~/Content/site")
+</head>
+<body>
+    <h1 class="header">Courses</h1>
+    <div class="menu">
+        [<a href="/STCourse">List</a>] &nbsp;
+        [<a href="/STCourse/Add">Add Course</a>] &nbsp;
+        [<a href="/STCourse/Search">Search</a>]
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

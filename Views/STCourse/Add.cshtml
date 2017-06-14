@@ -1,0 +1,34 @@
+﻿@model mvcdemo.Models.DBCourse
+
+@{
+    ViewBag.Title = "Add Course";
+    Layout = "~/Views/Shared/st.cshtml";
+}
+
+<h2>Add New Course</h2>
+
+@using (Html.BeginForm())
+{
+
+        <span>Course Name</span>
+        <br />
+        @Html.TextBoxFor(model => model.Name, new { required = "required" })
+        @Html.ValidationMessageFor(model => model.Name)
+        <p></p>
+        <span>Course Duration</span>
+        <br />
+        @Html.TextBoxFor(model => model.Duration, new { required = "required" , type="number" })
+        @Html.ValidationMessageFor(model => model.Duration)
+        <p></p>
+        <span>Course Fee</span>
+        <br />
+        @Html.TextBoxFor(model => model.Fee, new { required = "required", type="number" })
+        @Html.ValidationMessageFor(model => model.Fee)
+        <p></p>
+        <input type="submit" value="Add Course"/>
+        <p></p>
+        <div class="message">
+            @ViewBag.Message
+        </div>
+}
+
