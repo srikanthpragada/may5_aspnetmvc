@@ -1,12 +1,6 @@
 ﻿@model IEnumerable<mvcdemo.Models.DBCourse>
 
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/st.cshtml";
-}
-
- 
-<table cellpadding="5pt" width="100%" >
+<table cellpadding="5" width="100%">
     <tr style="background-color:blue;color:white">
         <th>
             @Html.DisplayNameFor(model => model.Name)

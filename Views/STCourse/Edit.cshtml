@@ -1,0 +1,30 @@
+﻿@model mvcdemo.Models.DBCourse
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/st.cshtml";
+}
+
+<h2>Edit Course</h2>
+
+@using (Html.BeginForm())
+{
+        @Html.HiddenFor(model => model.Id)
+        <div>Course Name</div>
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+        <p></p>
+        <div>Course Duration</div>
+        @Html.EditorFor(model => model.Duration)
+        @Html.ValidationMessageFor(model => model.Duration)
+        <p></p>
+
+        <div>Course Fee</div>
+        @Html.EditorFor(model => model.Fee)
+        @Html.ValidationMessageFor(model => model.Fee)
+        <p></p>
+        <input type="submit" value="Update"   />
+        <p></p>
+        <h3>@ViewBag.Message</h3>
+}
+ 

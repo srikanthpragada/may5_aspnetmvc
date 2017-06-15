@@ -10,11 +10,25 @@ namespace mvcdemo.Controllers
     public class STCourseController : Controller
     {
         [HttpGet]
-        [OutputCache( Duration=60)]
         public ActionResult Index()
         {
             STDbContext ctx = new STDbContext();
             return View(ctx.Courses.ToList());
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            STDbContext ctx = new STDbContext();
+            var course = ctx.Courses.Find(id);
+
+            if (course != null)
+            {
+                ctx.Courses.Remove(course);
+                ctx.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -44,5 +58,60 @@ namespace mvcdemo.Controllers
 
             return View(course);
         }
+
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            STDbContext ctx = new STDbContext();
+            var course = ctx.Courses.Find(id);
+
+            if (course != null)
+                return View(course);
+            else
+                return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, DBCourse course)
+        {
+            try
+            {
+                STDbContext ctx = new STDbContext();
+                var dbCourse = ctx.Courses.Find(id);
+
+                dbCourse.Name = course.Name;
+                dbCourse.Duration = course.Duration;
+                dbCourse.Fee = course.Fee;
+                ctx.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Sorry! Could not update course! Error --> " + ex.Message;
+            }
+
+            return View(course);
+        }
+
+
+        [HttpGet]
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Search(String courseName)
+        {
+            STDbContext ctx = new STDbContext();
+
+            var courses = from c in ctx.Courses
+                              where c.Name.Contains(courseName)
+                              select c;
+
+            return PartialView("SearchResults", courses);
+        }
+
     }
 }
